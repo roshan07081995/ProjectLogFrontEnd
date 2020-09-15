@@ -14,11 +14,17 @@
       <input matInput placeholder="Time Logged" formControlName="timeLogged" />
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Project" formControlName="projectId" />
+      <mat-select formControlName="projectId">
+        <mat-option [value]="0"> Select Project </mat-option>
+        <mat-option *ngFor="let data of ProjectList" [value]="data.id">
+          {{ data.projectName }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-      <mat-select>
+      <mat-select formControlName="employeeId">
+        <mat-option [value]="0"> Select Employee </mat-option>
         <mat-option *ngFor="let data of EmployeeList" [value]="data.id">
           {{ data.first_name }} {{ data.last_name }}
         </mat-option>

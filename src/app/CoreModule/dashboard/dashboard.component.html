@@ -1,1 +1,47 @@
-<p>dashboard works!</p>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
+    <!-- Position Column -->
+    <ng-container matColumnDef="first_name">
+      <th mat-header-cell *matHeaderCellDef>First Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.first_name }}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="last_name">
+      <th mat-header-cell *matHeaderCellDef>Last Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.last_name }}</td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="projectName">
+      <th mat-header-cell *matHeaderCellDef>Project Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.projectName }}</td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="projectDescription">
+      <th mat-header-cell *matHeaderCellDef>Project Description</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.projectDescription }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="totalEstimate">
+      <th mat-header-cell *matHeaderCellDef>Total Estimate</th>
+      <td mat-cell *matCellDef="let element">{{ element.totalEstimate }}</td>
+    </ng-container>
+    <ng-container matColumnDef="loggedHours">
+      <th mat-header-cell *matHeaderCellDef>Logged Hours</th>
+      <td mat-cell *matCellDef="let element">{{ element.loggedHours }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [length]="100"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+  >
+  </mat-paginator>
+</div>

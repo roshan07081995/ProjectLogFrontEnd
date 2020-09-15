@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LogsComponent } from './CoreModule/logs/logs.component';
 import { LogsCreateComponent } from './CoreModule/logs-create/logs-create.component';
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,7 @@ import { LogsCreateComponent } from './CoreModule/logs-create/logs-create.compon
     ReactiveFormsModule,
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

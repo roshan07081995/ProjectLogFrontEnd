@@ -7,8 +7,10 @@ import {
 } from '@angular/forms';
 import { LogService } from '../../Services/log.service';
 import { EmployeesService } from '../../Services/employees.service';
+import { ProjectService } from '../../Services/project.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-logs-create',
@@ -18,11 +20,14 @@ import { Router } from '@angular/router';
 export class LogsCreateComponent implements OnInit {
   myForm: FormGroup;
   EmployeeList: any;
+  ProjectList: any;
   constructor(
     public fb: FormBuilder,
     private router: Router,
+    private datePipe: DatePipe,
     public LogService: LogService,
     public EmployeeService: EmployeesService,
+    public ProjectService: ProjectService,
     private activatedRoute: ActivatedRoute
   ) {
     this.activatedRoute.queryParams.subscribe((params) => {
@@ -30,6 +35,7 @@ export class LogsCreateComponent implements OnInit {
       if (id) {
         this.LogService.getSingleLogdata(id).then(
           (res: any) => {
+            console.log(res[0]);
             this.myForm.patchValue(res[0]);
           },
           (err) => {}
@@ -43,6 +49,9 @@ export class LogsCreateComponent implements OnInit {
     this.EmployeeService.getEmployees().then((res) => {
       this.EmployeeList = res;
     });
+    this.ProjectService.getProjects().then((res) => {
+      this.ProjectList = res;
+    });
   }
 
   reactiveForm() {
@@ -55,8 +64,10 @@ export class LogsCreateComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.myForm.value);
-
+    this.myForm.value.dateSelected = this.datePipe.transform(
+      this.myForm.value.dateSelected,
+      'yyyy-MM-dd'
+    );
     this.activatedRoute.queryParams.subscribe((params) => {
       let id = params['id'];
       if (id) {

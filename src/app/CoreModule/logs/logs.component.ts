@@ -2,12 +2,13 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { LogService } from '../../Services/log.service';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
+import { DatePipe } from '@angular/common';
 
 export interface PeriodicElement {
   dateSelected: string;
   timeLogged: string;
-  projectId: string;
-  employeeId: string;
+  projectName: string;
+  first_name: string;
 }
 
 @Component({
@@ -20,15 +21,19 @@ export class LogsComponent implements OnInit {
   displayedColumns: string[] = [
     'dateSelected',
     'timeLogged',
-    'projectId',
-    'employeeId',
+    'projectName',
+    'first_name',
     'actions',
   ];
   dataSource: any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(public LogService: LogService, private router: Router) {
+  constructor(
+    public LogService: LogService,
+    private router: Router,
+    private datePipe: DatePipe
+  ) {
     this.getLogs();
   }
 
@@ -38,7 +43,12 @@ export class LogsComponent implements OnInit {
   getLogs(): void {
     this.LogService.getLogs().then((res: any) => {
       for (var i = 0; i < res.length; i++) {
+        res[i].dateSelected = this.datePipe.transform(
+          res[i].dateSelected,
+          'dd-MM-yyyy'
+        );
         this.ELEMENT_DATA.push(res[i]);
+        console.log(res[i]);
         this.dataSource = this.ELEMENT_DATA;
       }
     });
