@@ -35,7 +35,6 @@ export class LogsCreateComponent implements OnInit {
       if (id) {
         this.LogService.getSingleLogdata(id).then(
           (res: any) => {
-            console.log(res[0]);
             this.myForm.patchValue(res[0]);
           },
           (err) => {}

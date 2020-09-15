@@ -53,8 +53,6 @@ export class EmployeeCreateComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.myForm.value);
-
     this.activatedRoute.queryParams.subscribe((params) => {
       let id = params['id'];
       if (id) {
@@ -66,13 +64,10 @@ export class EmployeeCreateComponent implements OnInit {
         this.EmployeeService.addEmployee(this.myForm.value)
           .then((data: any) => {
             if (data) {
-              console.log(data);
             }
             //for refresh
           })
-          .catch((err) => {
-            console.log(err);
-          });
+          .catch((err) => {});
         this.router.navigate(['/employees']);
       }
     });

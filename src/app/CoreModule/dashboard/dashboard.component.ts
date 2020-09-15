@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { DashboardService } from '../../Services/dashboard.service';
-import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 
 export interface PeriodicElement {
@@ -9,7 +8,7 @@ export interface PeriodicElement {
   projectName: string;
   projectDescription: string;
   totalEstimate: string;
-  loggedHours: string;
+  time: string;
 }
 
 @Component({
@@ -25,7 +24,7 @@ export class DashboardComponent implements OnInit {
     'projectName',
     'projectDescription',
     'totalEstimate',
-    'loggedHours',
+    'time',
   ];
   dataSource: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -40,4 +39,30 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+  searchProject(val) {
+    this.DashboardService.getProjectData(val).then((res: any) => {
+      if (res.length) {
+        this.ELEMENT_DATA = [];
+        for (var i = 0; i < res.length; i++) {
+          this.ELEMENT_DATA.push(res[i]);
+          this.dataSource = this.ELEMENT_DATA;
+        }
+      } else {
+        this.dataSource = [];
+      }
+    });
+  }
+  searchEmployee(val) {
+    this.DashboardService.getEmployeeData(val).then((res: any) => {
+      if (res.length) {
+        this.ELEMENT_DATA = [];
+        for (var i = 0; i < res.length; i++) {
+          this.ELEMENT_DATA.push(res[i]);
+          this.dataSource = this.ELEMENT_DATA;
+        }
+      } else {
+        this.dataSource = [];
+      }
+    });
+  }
 }

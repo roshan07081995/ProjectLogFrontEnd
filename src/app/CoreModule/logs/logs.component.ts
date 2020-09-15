@@ -48,7 +48,7 @@ export class LogsComponent implements OnInit {
           'dd-MM-yyyy'
         );
         this.ELEMENT_DATA.push(res[i]);
-        console.log(res[i]);
+
         this.dataSource = this.ELEMENT_DATA;
       }
     });
