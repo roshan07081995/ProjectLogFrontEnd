@@ -1,0 +1,9 @@
+mat-sidenav {
+  width: 200px;
+}
+.mat-nav-list a {
+  color: #fff;
+}
+.mat-nav-list a.active {
+  background: blue;
+}

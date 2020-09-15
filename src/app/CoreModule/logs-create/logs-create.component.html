@@ -1,0 +1,32 @@
+<div class="container">
+  <form [formGroup]="myForm" (ngSubmit)="submitForm()" novalidate>
+    <mat-form-field class="example-full-width">
+      <input
+        matInput
+        [matDatepicker]="picker"
+        placeholder="Date"
+        formControlName="dateSelected"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Time Logged" formControlName="timeLogged" />
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Project" formControlName="projectId" />
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-select>
+        <mat-option *ngFor="let data of EmployeeList" [value]="data.id">
+          {{ data.first_name }} {{ data.last_name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="button-wrapper">
+      <button mat-flat-button color="primary">Submit</button>
+    </div>
+  </form>
+</div>
